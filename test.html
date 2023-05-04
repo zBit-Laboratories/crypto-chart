@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cryptocurrency Live Chart</title>
+  </head>
+  <body>
+    <h1>Cryptocurrency Live Chart</h1>
+    <div>
+      <label for="symbol">Symbol:</label>
+      <input type="text" id="symbol" name="symbol" value="BTC-USD">
+      <button onclick="getPrice()">Get Price</button>
+    </div>
+    <div>
+      <canvas id="chart"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script>
+      const canvas = document.getElementById('chart');
+      const ctx = canvas.getContext('2d');
+      let prices = [];
+      let chart;
+
+      function getPrice() {
+        const symbol = document.getElementById('symbol').value;
+        fetch(`/api/price?symbol=${symbol}`)
+          .then(res => res.text())
+          .then(price => {
+            prices.push(price);
+            if (prices.length > 10) { prices.shift(); }
+            if (!chart) { createChart(); }
+            else { updateChart(); }
+          });
+      }
+
+      function createChart() {
+        const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+      labels: labels,
+      datasets: [{
+        label: `${CURRENCY}-USD`,
+        data: prices,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+      },
+       options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+      }
+     });
+     };
+    </script>
+</body>
+</html>

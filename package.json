@@ -1,0 +1,30 @@
+{
+  "name": "crypto-chart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "check": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zBit-Laboratories/crypto-chart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/zBit-Laboratories/crypto-chart/issues"
+  },
+  "homepage": "https://github.com/zBit-Laboratories/crypto-chart#readme",
+  "dependencies": {
+    "chart.js": "^4.3.0",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1",
+    "nodemon": "^2.0.22",
+    "request": "^2.88.2"
+  }
+}
